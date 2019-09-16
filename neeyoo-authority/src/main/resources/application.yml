@@ -1,0 +1,81 @@
+server:
+  port: 15001
+  servlet:
+    context-path: /auth
+logging:
+  config: classpath:logback-spring.xml
+spring:
+  application:
+    name: neeyoo-authority
+  profiles:
+    active: local
+
+jwt:
+  secret:
+    key: your-secret-key #jwt生成密钥 用户登陆token
+  token:
+    key-format: JWT_TOKEN::%s #token 存储key 用户登陆token
+    expire-time: 604800000 # 毫秒单位 token过期时间：7day 604800000
+    refresh:
+      key-format: JWT_REFRESH_TOKEN::%s #refreshToken 存储key 登陆token
+      expire-time: 2592000000 # 毫秒单位 refreshToken过期时间：30day 2592000000
+  blacklist:
+    key-format: JWT_BLACKLIST::%s #token黑名单 存储key 登陆
+    expire-time: 8640000000 # 毫秒单位 过期时间：100day
+
+sms:
+  user:
+    register: SMS_REGISTER_CODE::%s
+    expire-time: 86400000 # 验证码过期时间 5分钟 = 300000
+
+# Mybatis
+mybatis:
+  type-aliases-package: com.neeyoo
+  configLocation: classpath:mybatis.xml
+  mapper-locations: classpath:mapper/**/*.xml
+
+#  feign 对hytrix的支持
+feign:
+  hystrix:
+    enabled: true
+
+---
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/neeyoo?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: root
+    tomcat:
+      testOnBorrow: true
+      validationQuery: SELECT 1
+redis:
+  # Redis数据库索引（默认为0）
+  database: 0
+  # 连接超时时间（毫秒）
+  timeout: 60000
+  # Redis服务器地址
+  host: 127.0.0.1
+  # Redis服务器连接端口
+  port: 6379
+  # Redis服务器连接密码（默认为空）
+  password:
+  pool:
+    # 连接池最大连接数（使用负值表示没有限制）
+    max-active: -1
+    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    max-wait: -1
+    # 连接池中的最大空闲连接
+    max-idle: 8
+    # 连接池中的最小空闲连接
+    min-idle: 0
+#是否激活 swagger true or false, 生产环境为false
+swagger:
+  enable: true
+---

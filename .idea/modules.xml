@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-authority/neeyoo-authority.iml" filepath="$PROJECT_DIR$/neeyoo-authority/neeyoo-authority.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-common/neeyoo-common.iml" filepath="$PROJECT_DIR$/neeyoo-common/neeyoo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-consumer/neeyoo-consumer.iml" filepath="$PROJECT_DIR$/neeyoo-consumer/neeyoo-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-gateway/neeyoo-gateway.iml" filepath="$PROJECT_DIR$/neeyoo-gateway/neeyoo-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-spring-cloud.iml" filepath="$PROJECT_DIR$/neeyoo-spring-cloud.iml" />
+    </modules>
+  </component>
+</project>
