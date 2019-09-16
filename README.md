@@ -30,3 +30,5 @@ Spring Cloud 项目
     	- gateway-server
     - neeyoo-authority 鉴权模块
     - neeyoo-config 配置中心消息总线 
+
+- 20190916 整合了gateway + swagger2实现api文档的统一管理, 增加了对swagger相关url权限的过滤, 下一步完善鉴权模块
