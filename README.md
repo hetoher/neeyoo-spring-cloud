@@ -2,16 +2,16 @@
 Spring Cloud 项目
 
 ## 项目简介
-Spring Boot 2.1.3.RELEASE
-Spring Cloud Gateway 网关
-Spring Cloud Config 配置中心
-Spring Cloud Bus 消息总线
-Spring Security security
-JWT 用于token验证
-Redis redis缓存
-Mybatis 持久层框架
-Alibaba Nacos 服务注册
-RabbitMQ 消息队列
+    Spring Boot 2.1.3.RELEASE
+    Spring Cloud Gateway 网关
+    Spring Cloud Config 配置中心
+    Spring Cloud Bus 消息总线
+    Spring Security security
+    JWT 用于token验证
+    Redis redis缓存
+    Mybatis 持久层框架
+    Alibaba Nacos 服务注册
+    RabbitMQ 消息队列
 
 ## 项目结构(一步一步学习完善中, 先这么构思)
 - neeyoo-logistics-api
