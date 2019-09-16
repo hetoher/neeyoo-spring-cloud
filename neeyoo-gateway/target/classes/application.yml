@@ -1,0 +1,73 @@
+server:
+  port: 15000
+logging:
+  config: classpath:logback-spring.xml
+spring:
+  application:
+    name: neeyoo-gateway
+  profiles:
+    active: local
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#不进行token拦截
+auth:
+  skip:
+    urls: |
+      /auth/user/login,/auth/user/loginOut,/auth/user/refreshToken,/auth/user/verifyJWT,/auth/user/userRegister,
+      /auth/user/isBlackToken,/auth/user/userExist,/auth/user/modifyPassword
+    otherUrls: |
+      ^/auth/(doc.html|webjars|v2|swagger-resources)[^\\s]*,
+      ^/consumer/(doc.html|webjars|v2|swagger-resources)[^\\s]*
+
+jwt:
+  blacklist:
+      key-format: JWT_BLACKLIST::%s #token黑名单 存储key 登陆
+
+#  feign 对hystrix的支持
+feign:
+  hystrix:
+    enabled: true
+ribbon:
+  ReadTimeout: 15000
+  ConnectTimeout: 60000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+---
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+    gateway:
+      routes:
+      - id: neeyoo-authority
+        uri: lb://neeyoo-authority
+        predicates:
+        - Path=/auth/**
+        filters:
+        - name: RequestRateLimiter
+          args:
+            # 用于限流的键的解析器的 Bean 对象的名字
+            key-resolver: '#{@ipKeyResolver}'
+            # 令牌桶每秒填充平均速率
+            redis-rate-limiter.replenishRate: 10
+            # 令牌桶总容量
+            redis-rate-limiter.burstCapacity: 20
+      - id: neeyoo-consumer
+        uri: lb://neeyoo-consumer
+        predicates:
+        - Path=/consumer/**
+---
