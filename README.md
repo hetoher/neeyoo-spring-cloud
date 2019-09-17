@@ -6,7 +6,6 @@ Spring Cloud 项目
 - Spring Cloud Gateway 网关
 - Spring Cloud Config 配置中心
 - Spring Cloud Bus 消息总线
-- Spring Security security
 - JWT 用于token验证
 - Redis redis缓存
 - Mybatis 持久层框架
@@ -32,3 +31,4 @@ Spring Cloud 项目
     - neeyoo-config 配置中心消息总线 
 
 - 20190916 整合了gateway + swagger2实现api文档的统一管理, 增加了对swagger相关url权限的过滤, 下一步完善鉴权模块
+- 接下来对jwt token验证的编写
