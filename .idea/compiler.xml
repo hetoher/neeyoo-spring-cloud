@@ -8,16 +8,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="neeyoo-authority" />
         <module name="neeyoo-common" />
+        <module name="neeyoo-config" />
         <module name="neeyoo-consumer" />
         <module name="neeyoo-gateway" />
+        <module name="neeyoo-tool" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="neeyoo-authority" target="1.8" />
       <module name="neeyoo-common" target="1.8" />
+      <module name="neeyoo-config" target="1.8" />
       <module name="neeyoo-consumer" target="1.8" />
       <module name="neeyoo-gateway" target="1.8" />
       <module name="neeyoo-spring-cloud" target="1.8" />
+      <module name="neeyoo-tool" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/neeyoo-authority/neeyoo-authority.iml" filepath="$PROJECT_DIR$/neeyoo-authority/neeyoo-authority.iml" />
       <module fileurl="file://$PROJECT_DIR$/neeyoo-common/neeyoo-common.iml" filepath="$PROJECT_DIR$/neeyoo-common/neeyoo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-config/neeyoo-config.iml" filepath="$PROJECT_DIR$/neeyoo-config/neeyoo-config.iml" />
       <module fileurl="file://$PROJECT_DIR$/neeyoo-consumer/neeyoo-consumer.iml" filepath="$PROJECT_DIR$/neeyoo-consumer/neeyoo-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/neeyoo-gateway/neeyoo-gateway.iml" filepath="$PROJECT_DIR$/neeyoo-gateway/neeyoo-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/neeyoo-spring-cloud.iml" filepath="$PROJECT_DIR$/neeyoo-spring-cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/neeyoo-tool/neeyoo-tool.iml" filepath="$PROJECT_DIR$/neeyoo-tool/neeyoo-tool.iml" />
     </modules>
   </component>
 </project>

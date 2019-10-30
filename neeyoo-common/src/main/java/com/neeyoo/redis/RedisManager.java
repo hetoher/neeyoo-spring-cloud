@@ -108,7 +108,7 @@ public class RedisManager {
      * @return value
      */
     public String get(String key) {
-        return (String) redisTemplate.opsForValue().get(key);
+        return redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -129,8 +129,8 @@ public class RedisManager {
      * @param field
      * @return
      */
-    public String hget(String key, String field) {
-        return (String) redisTemplate.opsForHash().get(key, field);
+    public Object hget(String key, String field) {
+        return redisTemplate.opsForHash().get(key, field);
     }
 
     /**
@@ -170,8 +170,8 @@ public class RedisManager {
      * @param key
      * @return 列表key的头元素。
      */
-    public String lpop(String key) {
-        return (String) redisTemplate.opsForList().leftPop(key);
+    public Object lpop(String key) {
+        return redisTemplate.opsForList().leftPop(key);
     }
 
     /**

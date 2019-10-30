@@ -13,6 +13,8 @@
         <module>neeyoo-authority</module>
         <module>neeyoo-common</module>
         <module>neeyoo-consumer</module>
+        <module>neeyoo-tool</module>
+        <module>neeyoo-config</module>
     </modules>
 
     <properties>

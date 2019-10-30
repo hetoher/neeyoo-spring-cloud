@@ -4,7 +4,9 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/neeyoo-authority" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/neeyoo-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neeyoo-config" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/neeyoo-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/neeyoo-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neeyoo-tool" charset="UTF-8" />
   </component>
 </project>

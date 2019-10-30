@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -26,10 +27,19 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "consumer-接口文档")
 public class TestController {
 
+    @Value("${spring.datasource.url}")
+    private String url;
+
     @Autowired
     private TestService testService;
     @Autowired
     private RedisManager redisManager;
+
+    @ApiOperation(value = "consumer-测试接口(get)", notes = "测试接口")
+    @GetMapping("/test")
+    public ApiResult test() throws ConsumerException {
+        return ApiResult.ok(url, "成功");
+    }
 
     @ApiOperation(value = "consumer-测试接口(get)", notes = "测试接口")
     @ApiImplicitParam(name = "testString", value = "测试字符串", required = true, dataType = "String")
@@ -47,7 +57,7 @@ public class TestController {
     @PostMapping("/postTest")
     public ApiResult postTest(@Validated @RequestBody TestRequest testRequest) throws ConsumerException {
         log.info("post接口测试");
-        if (testRequest.getName().equals("lili")) {
+        if (testRequest.getName().equals("yes")) {
             throw new ConsumerException(-99, "post测试失败");
         }
         return ApiResult.ok(testRequest, "成功");
@@ -69,7 +79,7 @@ public class TestController {
     @GetMapping("/queryCode")
     public ApiResult queryCode(@RequestParam String phone) throws ConsumerException {
         log.info("测试查询缓存");
-        String code = redisManager.hget("SMS_CODE::" + phone, "code");
+        Object code = redisManager.hget("SMS_CODE::" + phone, "code");
         return ApiResult.ok(code, "成功");
     }
 
