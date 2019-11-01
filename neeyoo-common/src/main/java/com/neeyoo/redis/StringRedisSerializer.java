@@ -15,9 +15,9 @@ public class StringRedisSerializer implements RedisSerializer<Object> {
 
     private final Charset charset;
 
-    private final String target = "\"";
+    private static final String target = "\"";
 
-    private final String replacement = "";
+    private static final String replacement = "";
 
     public StringRedisSerializer() {
         this(Charset.forName("UTF8"));
@@ -35,11 +35,10 @@ public class StringRedisSerializer implements RedisSerializer<Object> {
 
     @Override
     public byte[] serialize(Object object) {
-        String string = JSON.toJSONString(object);
-        if (string == null) {
+        if (null == object){
             return null;
         }
-        string = string.replace(target, replacement);
-        return string.getBytes(charset);
+        String strByte = JSON.toJSONString(object).replace(target, replacement);
+        return strByte.getBytes(charset);
     }
 }

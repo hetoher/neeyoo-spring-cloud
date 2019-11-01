@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neeyoo.dao.ConsumerDAO">
+
+    <!--通过userPhone查询用户信息-->
+    <select id="findByUserPhone" resultType="com.neeyoo.domain.NeeYooConsumer">
+        select * from neeyoo_consumer
+        <where>
+            <if test="userPhone != null and userPhone.trim() != ''">
+                and user_phone = #{userPhone}
+            </if>
+        </where>
+    </select>
+
+    <!--更新极光id和登录时间-->
+    <update id="updateRegistrationId">
+        update neeyoo_consumer set registration_id = #{registrationId}, last_login_time = #{loginTime}
+        where user_phone = #{userPhone}
+    </update>
+
+    <!--通过id查询用户信息-->
+    <select id="findByUserId" resultType="com.neeyoo.domain.NeeYooConsumer">
+        select * from neeyoo_consumer
+        <where>
+            <if test="userId != null">
+                and id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <!-- 用户注册  -->
+    <!--<insert id="insertLogisticsUser" parameterType="com.neeyoo.domain.NeeYooConsumer" useGeneratedKeys="true" keyProperty="id">-->
+        <!--insert into neeyoo_consumer-->
+        <!--(-->
+        <!--`nick_name`,-->
+        <!--`user_phone`,-->
+        <!--`password`,-->
+        <!--`salt`,-->
+        <!--`registration_id`,-->
+        <!--`create_time`-->
+        <!--)-->
+        <!--values-->
+        <!--(-->
+        <!--#{userPhone},-->
+        <!--#{userPhone},-->
+        <!--#{password},-->
+        <!--#{salt},-->
+        <!--#{registrationId},-->
+        <!--#{createTime}-->
+        <!--)-->
+    <!--</insert>-->
+
+</mapper>

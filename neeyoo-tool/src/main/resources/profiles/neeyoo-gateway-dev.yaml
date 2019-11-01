@@ -1,0 +1,45 @@
+#不进行token拦截
+auth:
+  skip:
+    urls: |
+      /auth/user/login,/auth/user/loginOut,/auth/user/refreshToken,/auth/user/verifyJWT,/auth/user/userRegister,
+      /auth/user/isBlackToken,/auth/user/userExist,/auth/user/modifyPassword
+    otherUrls: |
+      ^/auth/(doc.html|webjars|v2|swagger-resources)[^\\s]*,
+      ^/consumer/(doc.html|webjars|v2|swagger-resources)[^\\s]*
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+    gateway:
+      routes:
+      - id: neeyoo-authority
+        uri: lb://neeyoo-authority
+        predicates:
+        - Path=/auth/**
+        filters:
+        - name: RequestRateLimiter
+          args:
+            # 用于限流的键的解析器的 Bean 对象的名字
+            key-resolver: '#{@ipKeyResolver}'
+            # 令牌桶每秒填充平均速率
+            redis-rate-limiter.replenishRate: 10
+            # 令牌桶总容量
+            redis-rate-limiter.burstCapacity: 20
+      - id: neeyoo-consumer
+        uri: lb://neeyoo-consumer
+        predicates:
+        - Path=/consumer/**
+  zipkin:
+    base-url: http://localhost:9411/
+    # 不断的去跟踪所有服务, 不然疯狂报错: failed to req API:/nacos/v1/ns/instance/list after all servers
+    discoveryClientEnabled: false
+  sender:
+    type: web
+  sleuth:
+    sampler:
+      probability: 1
+

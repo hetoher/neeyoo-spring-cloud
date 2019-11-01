@@ -1,19 +1,21 @@
 package com.neeyoo.controller;
 
 import com.neeyoo.exception.AuthorityException;
+import com.neeyoo.exception.ConsumerException;
 import com.neeyoo.redis.RedisManager;
 import com.neeyoo.request.LoginRequest;
+import com.neeyoo.request.RefreshTokenRequest;
 import com.neeyoo.service.ConsumerService;
 import com.neeyoo.util.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.*;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by NeeYoo.
@@ -45,19 +47,36 @@ public class AuthorityController {
     @Autowired
     private ConsumerService consumerService;
 
+    @ApiOperation(value = "consumer-测试接口(get)", notes = "测试接口")
+    @ApiImplicitParam(name = "testString", value = "测试字符串", required = true, dataType = "String")
+    @GetMapping("/getTest")
+    public ApiResult getTest(@RequestParam String testString) throws ConsumerException {
+        log.info("get接口测试");
+        if (org.springframework.util.StringUtils.isEmpty(testString)) {
+            throw new ConsumerException(-99, "测试失败");
+        }
+        return ApiResult.ok(testString, "成功");
+    }
+
     /**
      * Create by NeeYoo.
      * Create on 2019/10/29.
      * Description: 登录授权
      */
-    @ApiOperation(value = "登录授权", notes = "LoginRequest登录请求实体类")
-    @PostMapping("/consumer/login")
+    @ApiOperation(value = "登录授权", notes = "登录授权")
+    @PostMapping("/login")
     public ApiResult login(@Validated @RequestBody LoginRequest request) throws AuthorityException {
         // TODO 这里应该做前传过来的密码加密, 或者整个参数加密
         return ApiResult.ok(consumerService.login(request), "登录成功");
     }
 
     // TODO 刷新token
+    @ApiOperation(value = "刷新token", notes = "刷新token")
+    @PostMapping("/refreshToken")
+    public ApiResult refreshToken(@Validated @RequestBody RefreshTokenRequest request) throws AuthorityException {
+        return ApiResult.ok(consumerService.refreshToken(request), "操作成功");
+    }
+
     // TODO 验证token
     // TODO 退出登录
 

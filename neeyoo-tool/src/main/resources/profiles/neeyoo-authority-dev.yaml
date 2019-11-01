@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+  zipkin:
+    base-url: http://localhost:9411/
+    # 不断的去跟踪所有服务, 不然疯狂报错: failed to req API:/nacos/v1/ns/instance/list after all servers
+    discoveryClientEnabled: false
+  sender:
+    type: web
+  sleuth:
+    sampler:
+      probability: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/neeyoo?useUnicode=true&characterEncoding=utf8&useSSL=true&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: root
+    tomcat:
+      testOnBorrow: true
+      validationQuery: SELECT 1
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 5
+    # 连接超时时间（毫秒）
+    timeout: 60000
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: -1
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+#是否激活 swagger true or false, 生产环境为false
+swagger:
+  enable: true
+  
